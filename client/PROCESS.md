@@ -9,7 +9,7 @@ Register
             User.findUser({email})
                 User -> return res 'email exists - choose another'
 
-*               ->  token = jwt.sign(name,email,pass) + env.JWT_ACCOUNT_ACTIVATION + expiresIn
+*               ->  token = jwt.sign(name, email, pass) + env.JWT_ACCOUNT_ACTIVATION + expiresIn
                                                               [random string]
 *                   emailParams = email, token
                     ses.sendEmail(params).promise()
@@ -28,13 +28,13 @@ Activate
 
     Server
         exports.registerActivate = (req, res)
- *          jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, function(err, decoded)
+*          jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, function(err, decoded)
                 error -> return res.JSON({...})
 
-*               --> { name, email, password } = jwt.decode(token)
+*               --> { name, email, pass } = jwt.decode(token)
                     username = shortId.generate()
                     if not user in db
-                        newUser = new User({ username, name, email, password })
+                        newUser = new User({ username, name, email, pass })
                         newUser.save((err, result)
 
     LocalStorage: no user entry
@@ -43,10 +43,10 @@ Activate
     
 Login 
     Client
-        await axios.post(`${API}/login`, { email, password} )
-*           response -> authenticate <- isAuth() <- 
-getCookie('token') and getItem('user']
+        await axios.post(`${API}/login`, { email, pass } )
+*           response -> authenticate <- isAuth() <- getCookie('token') and getItem('user']
                         [setCookie and setLocalStorage]
+                        
             error ->    set error msg
 
     Server

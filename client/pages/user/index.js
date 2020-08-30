@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import Layout from '../../components/Layout';
 import axios from 'axios';
+
+import Layout from '../../components/Layout';
+
 
 const User = ({ todos }) => <Layout>{JSON.stringify(todos)}</Layout>;
 
@@ -11,5 +13,14 @@ User.getInitialProps = async () => {
         todos: response.data
     };
 };
+
+// const User = () => {
+//     const [todos, setTodos] = useState([]);
+//     useEffect(() => {
+//         axios.get('https://jsonplaceholder.typicode.com/todos')
+//             .then(res => setTodos(res.data))
+//     }, [])
+//     return <Layout>{JSON.stringify(todos)}</Layout>
+// }
 
 export default User;
