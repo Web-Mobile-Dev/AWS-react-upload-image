@@ -58,9 +58,28 @@ Login
 *               token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' })
                 return res.JSON( token + user )
 
+    Client
+        authenticate(response, () =>
+                isAuth() && isAuth().role === 'admin' ? Router.push('/admin') : Router.push('/user')
+            );
+
+            user/index  -> withUser(User) 
+                        -> WithUser ->  const response = await axios.get(`${API}/user`, headers: {
+*                                                    authorization: `Bearer ${token}`, .....}
+                                        user ? await Page
+                                            : redirect '/'
+
+            admin/index -> withAdmin(User)
+                        -> ...
+
     LocalStorage: user
     coockie: token
     db: User
+
+
+
+
+
     
 Logout
     Client
