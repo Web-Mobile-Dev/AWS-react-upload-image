@@ -17,6 +17,8 @@ export const removeCookie = key => {
     }
 };
 
+// get from cookie such as stored token
+// will be useful when we need to make request to server with auth token
 export const getCookie = (key, req) => {
     // if (process.browser) {
     //     return cookie.get(key);

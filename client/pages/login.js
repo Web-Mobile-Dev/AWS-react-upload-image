@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
+import Layout from '../components/Layout';
 import Link from 'next/link';
 import Router from 'next/router';
 import axios from 'axios';
-
 import { showSuccessMessage, showErrorMessage } from '../helpers/alerts';
 import { API } from '../config';
 import { authenticate, isAuth } from '../helpers/auth';
-import Layout from '../components/Layout';
 
 const Login = () => {
     const [state, setState] = useState({
