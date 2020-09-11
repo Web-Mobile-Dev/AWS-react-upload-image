@@ -10,7 +10,7 @@ import { authenticate, isAuth } from '../helpers/auth';
 const Login = () => {
     const [state, setState] = useState({
         email: 'louis200909@outlook.com',
-        password: 'rrrrrr',
+        password: 'aaabbb',
         error: '',
         success: '',
         buttonText: 'Login'
@@ -80,6 +80,9 @@ const Login = () => {
                 {success && showSuccessMessage(success)}
                 {error && showErrorMessage(error)}
                 {loginForm()}
+                <Link href="/auth/password/forgot">
+                    <a className="text-danger float-right">Forgot Password</a>
+                </Link>
             </div>
         </Layout>
     );

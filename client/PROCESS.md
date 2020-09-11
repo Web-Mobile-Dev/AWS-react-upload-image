@@ -41,7 +41,7 @@ Activate
     coockie: no user entry
     db: User
     
-Login 
+     
     Client
         await axios.post(`${API}/login`, { email, pass } )
 *           response -> authenticate <- isAuth() <- getCookie('token') and getItem('user']
@@ -76,10 +76,34 @@ Login
     coockie: token
     db: User
 
+Forgot Passwword
+    Client
+        <Link href="/auth/password/forgot">
+            <a className="text-danger float-right">Forgot Password</a>
+                |
+                v
+        response = await axios.put(`${API}/forgot-password`, { email })
+            setState
+            error
+    Server
+        exports.forgotPassword = (req, res) 
+            User.findOne({ email }).exec((err, user) 
+                error -> return res.status(400).json
 
+            const sendEmail = ses.sendEmail(params).promise()
+                data => message: `Email has been sent to ${email}.
+                error => message: `We could not vefiry your email
 
+    Client [id]
+        response = await axios.put(`${API}/reset-password`, { resetPasswordLink: token, newPassword })
+    
+    Server
+        exports.resetPassword = (req, res)
+            jwt.verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD, (err, success)
 
-
+                User.findOne({ resetPasswordLink }).exec((err, user)
+                    user = _.extend(user, updatedFields);
+                    user.save((err, result) => {
     
 Logout
     Client
