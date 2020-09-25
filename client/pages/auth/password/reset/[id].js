@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Router, { withRouter } from 'next/router';
-import jwt from 'jsonwebtoken';
-
 import { showSuccessMessage, showErrorMessage } from '../../../../helpers/alerts';
 import { API } from '../../../../config';
+import Router, { withRouter } from 'next/router';
+import jwt from 'jsonwebtoken';
 import Layout from '../../../../components/Layout';
 
 const ResetPassword = ({ router }) => {
@@ -21,30 +20,20 @@ const ResetPassword = ({ router }) => {
     useEffect(() => {
         console.log(router);
         const decoded = jwt.decode(router.query.id);
-        if (decoded) setState({ 
-            ...state, 
-            name: decoded.name, 
-            token: router.query.id 
-        });
+        if (decoded) setState({ ...state, name: decoded.name, token: router.query.id });
     }, [router]);
 
     const handleChange = e => {
-        setState({ 
-            ...state, 
-            newPassword: 
-            e.target.value, 
-            success: '', 
-            error: '' 
-        });
+        setState({ ...state, newPassword: e.target.value, success: '', error: '' });
     };
 
     const handleSubmit = async e => {
         e.preventDefault();
-      
+        // console.log('post email to ', email);
         setState({ ...state, buttonText: 'Sending' });
         try {
             const response = await axios.put(`${API}/reset-password`, { resetPasswordLink: token, newPassword });
- 
+            // console.log('FORGOT PASSWORD', response);
             setState({
                 ...state,
                 newPassword: '',

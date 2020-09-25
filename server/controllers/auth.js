@@ -149,16 +149,16 @@ exports.adminMiddleware = (req, res, next) => {
 
 exports.forgotPassword = (req, res) => {
     const { email } = req.body;
-  
+    // check if user exists with that email
     User.findOne({ email }).exec((err, user) => {
         if (err || !user) {
             return res.status(400).json({
                 error: 'User with that email does not exist'
             });
         }
-      
-        const token = jwt.sign({ name: user.name }, process.env.JWT_RESET_PASSWORD, { expiresIn: '60m' });
-    
+        // generate token and email to user
+        const token = jwt.sign({ name: user.name }, process.env.JWT_RESET_PASSWORD, { expiresIn: '10m' });
+        // send email
         const params = forgotPasswordEmailParams(email, token);
 
         // populate the db > user > resetPasswordLink
