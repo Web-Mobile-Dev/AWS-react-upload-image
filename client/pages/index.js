@@ -1,7 +1,8 @@
-import Layout from '../components/Layout';
 import axios from 'axios';
 import Link from 'next/link';
+
 import { API } from '../config';
+import Layout from '../components/Layout';
 
 const Home = ({ categories }) => {
     const listCategories = () =>
@@ -11,6 +12,7 @@ const Home = ({ categories }) => {
                 <a style={{ border: '1px solid red' }} className="bg-light p-3 col-md-4">
                     <div>
                         <div className="row">
+
                             <div className="col-md-4">
                                 <img
                                     src={c.image && c.image.url}
@@ -22,6 +24,7 @@ const Home = ({ categories }) => {
                             <div className="col-md-8">
                                 <h3>{c.name}</h3>
                             </div>
+                            
                         </div>
                     </div>
                 </a>

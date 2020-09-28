@@ -14,16 +14,17 @@ const s3 = new AWS.S3({
 
 exports.create = (req, res) => {
     let form = new formidable.IncomingForm();
+
     form.parse(req, (err, fields, files) => {
         if (err) {
             return res.status(400).json({
                 error: 'Image could not upload'
             });
         }
+
         // console.table({err, fields, files})
         const { name, content } = fields;
         const { image } = files;
-
         const slug = slugify(name);
         let category = new Category({ name, content, slug });
 
@@ -32,6 +33,7 @@ exports.create = (req, res) => {
                 error: 'Image should be less than 2mb'
             });
         }
+
         // upload image to s3
         const params = {
             Bucket: 'louis-20200912',
@@ -59,6 +61,7 @@ exports.create = (req, res) => {
                 return res.json(success);
             });
         });
+        
     });
 };
 

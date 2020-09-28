@@ -1,10 +1,11 @@
-const User = require('../models/user');
 const AWS = require('aws-sdk');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
-const { registerEmailParams, forgotPasswordEmailParams } = require('../helpers/email');
-const shortId = require('shortid');
 const _ = require('lodash');
+const shortId = require('shortid');
+
+const { registerEmailParams, forgotPasswordEmailParams } = require('../helpers/email');
+const User = require('../models/user');
 
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -129,6 +130,7 @@ exports.authMiddleware = (req, res, next) => {
 
 exports.adminMiddleware = (req, res, next) => {
     const adminUserId = req.user._id;
+    
     User.findOne({ _id: adminUserId }).exec((err, user) => {
         if (err || !user) {
             return res.status(400).json({
